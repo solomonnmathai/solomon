@@ -339,10 +339,43 @@
 
     <script>
         document.addEventListener('keyup', (e) => {
-        navigator.clipboard.writeText('');
-        alert('screenshot Disable');
+            navigator.clipboard.writeText('');
+            alert('Screenshot Disabled');
         });
-        </script>
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth <= 768) {
+            document.addEventListener('keyup', (e) => {
+                navigator.clipboard.writeText('');
+                alert('Screenshot Disabled');
+            });
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'PrintScreen') {
+            navigator.clipboard.writeText('');
+            alert('Screenshot Disabled');
+            }
+        });
+
+        document.addEventListener('keyup', (e) => {
+            if (e.key === 'PrintScreen') {
+            navigator.clipboard.writeText('');
+            alert('Screenshot Disabled');
+            }
+        });
+
+        document.addEventListener('paste', (e) => {
+            e.preventDefault();
+            alert('Screenshot Disabled');
+        });
+
+        document.addEventListener('copy', (e) => {
+            e.preventDefault();
+            alert('Screenshot Disabled');
+        });
+    </script>
 
 
 
