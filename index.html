@@ -12,7 +12,8 @@
     <header>
         <div class="navbar">
             <div class="logo">
-                <a href="#">logo</a>
+                <a href="#"></a>
+            <img src="./images/wedding-29.png" alt="Logo" style="height: 50px; width: 50px; margin-left: 10px;">
             </div>
         
             <ul class="links">
@@ -234,9 +235,12 @@
                         const event = {
                             action: 'TEMPLATE',
                             text: 'Wedding Reminder',
-                            dates: '20250705T140000Z/20250705T150000Z',
+                            dates: '20250705T093000Z/20250705T153000Z',
                             details: 'Reminder for the wedding on July 5, 2025',
-                            location: 'Your Wedding Location'
+                            location: 'https://maps.app.goo.gl/YcjgtksrYeoFfgZ57',
+                            trp: 'true',
+                            add: 'default',
+                            notification: '1d'
                         };
                         const baseUrl = 'https://www.google.com/calendar/render';
                         const queryString = new URLSearchParams(event).toString();
@@ -250,7 +254,62 @@
                 </div>
 
                 <div class="local">
-                    <button class="btn">LOCATION</button>
+                    <button class="btn2" id="addNoteBtn2">ADD NOTE</button>
+                </div>
+                <div id="popupForm" class="popup-form">
+                    <form autocomplete="off" method="post" name="google-sheet"> 
+                        <div class="form-container">
+                        <h2>Leave a Message</h2>
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required>
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" required></textarea>
+                        <button class="button1" onclick="submitForm()">Submit</button>
+                        <button class="button1" onclick="closeForm()">Close</button>
+                        </div>
+                    </form>
+                </div>
+
+                <script> 
+                    const scriptURL = 'https://script.google.com/macros/s/AKfycbwTpXTMf_B9z__29pNRKg4Ih7zG1GpXHPKq38wC0wcsD4VuQaCpUcVAHzkRXXoLN6zpow/exec' 
+                    const form = document.forms['google-sheet'] 
+                    form.addEventListener('submit', e => { 
+                    e.preventDefault() 
+                    fetch(scriptURL, { method: 'POST', body: new FormData(form)}) 
+                    .then(response => alert("your message have been sent successfully")) 
+                    .catch(error => console.error('Error!', error.message)) 
+                    }) 
+                </script>
+
+                <script>
+                     document.getElementById('addNoteBtn2').addEventListener('click', function() {
+                     document.getElementById('popupForm').style.display = 'flex';});
+
+                    function closeForm() {
+                    document.getElementById('popupForm').style.display = 'none';}
+
+                    function submitForm() {
+                    const name = document.getElementById('name').value;
+                    const message = document.getElementById('message').value;
+                    if (name && message) {
+                    alert(`Name: ${name}\nMessage: ${message}`);
+                    closeForm();} else {
+                    alert('Please fill out all fields.');}}
+   
+                </script>
+
+                
+
+
+
+
+
+ 
+
+
+                <div class="leaf6">
+                    <img src="./images/leaf right.gif" alt="">
+
                 </div>
 
 
@@ -337,12 +396,7 @@
     </section>
 
 
-    <script>
-        document.addEventListener('keyup', (e) => {
-        navigator.clipboard.writeText('');
-        alert('screenshot Disable');
-        });
-        </script>
+
 
 
 

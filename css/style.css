@@ -50,6 +50,15 @@ header {
     justify-content: space-between;
 }
 
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 20%;
+}
+
 .navbar .logo a {
     font-size: 1.5rem;
     font-weight: bold;
@@ -195,6 +204,9 @@ header {
     float: left;
     display: block;
 }
+
+
+
 
 
 .leaf1 img{
@@ -528,8 +540,68 @@ padding: 40px;
     width: 40%; /* Adjust the size as needed */
     height: auto;
 }
-    
+ 
 
+.leaf6 img{
+    width: 30%;
+    
+    
+}
+
+
+.popup-form {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.form-container {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.form-container input, .form-container textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.btn2 {
+    background: linear-gradient(270deg, #ff7e5f, #feb47b);
+    background-size: 400% 400%;
+    animation: gradientAnimation 5s ease infinite;
+    color: white;
+    padding: 19px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 181px;
+    text-align: center;
+    margin: 10px;
+}
+.button1{
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 5px;
+    
+}
 
 
 
@@ -733,11 +805,11 @@ padding: 40px;
         flex-direction: column;
         text-align: center;
         background: rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(10px);
-        border-radius: 10px;
+        backdrop-filter: blur(2px);
+        border-radius: 2px;
         border: 1px solid rgba(255, 255, 255, 0.3);
         line-height: 25px;
-        height: 1000px
+        height: 1000px;
     }
 
 
@@ -749,11 +821,19 @@ padding: 40px;
         flex-direction: column;
         text-align: center;
         background: rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(10px);
+        backdrop-filter: blur(3px);
         border-radius: 10px;
         border: 1px solid rgba(255, 255, 255, 0.3);
         line-height: 25px;
         height: 1000px;
+    }
+
+    .leaf6 img{
+        position: absolute;
+        top: 200%;
+        width: 35%;
+        
+        
     }
 
 
