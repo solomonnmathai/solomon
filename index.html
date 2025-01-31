@@ -119,7 +119,7 @@
         <div class="col-md-6">
             <div class="container">
                 <div class="girl">
-                    <img src="./images/bride.png" alt="Bride">
+                    <img src="./images/brideimg.png" alt="Bride">
                 </div>
                 <div class="bride">
                     <img src="./images/Rectangle.png" alt="Rectangle">
@@ -339,43 +339,10 @@
 
     <script>
         document.addEventListener('keyup', (e) => {
-            navigator.clipboard.writeText('');
-            alert('Screenshot Disabled');
+        navigator.clipboard.writeText('');
+        alert('screenshot Disable');
         });
-
-        window.addEventListener('resize', () => {
-            if (window.innerWidth <= 768) {
-            document.addEventListener('keyup', (e) => {
-                navigator.clipboard.writeText('');
-                alert('Screenshot Disabled');
-            });
-            }
-        });
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'PrintScreen') {
-            navigator.clipboard.writeText('');
-            alert('Screenshot Disabled');
-            }
-        });
-
-        document.addEventListener('keyup', (e) => {
-            if (e.key === 'PrintScreen') {
-            navigator.clipboard.writeText('');
-            alert('Screenshot Disabled');
-            }
-        });
-
-        document.addEventListener('paste', (e) => {
-            e.preventDefault();
-            alert('Screenshot Disabled');
-        });
-
-        document.addEventListener('copy', (e) => {
-            e.preventDefault();
-            alert('Screenshot Disabled');
-        });
-    </script>
+        </script>
 
 
 
