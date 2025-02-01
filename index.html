@@ -264,62 +264,78 @@
                         <input type="text" id="name" name="name" required>
                         <label for="message">Message:</label>
                         <textarea id="message" name="message" required></textarea>
-                        <button class="button1" onclick="submitForm()">Submit</button>
-                        <button class="button1" onclick="closeForm()">Close</button>
+                        <button class="button1" type="submit">Submit</button>
+                        <button class="button1" type="button" onclick="closeForm()">Close</button>
                         </div>
                     </form>
                 </div>
 
                 <script> 
                     const scriptURL = 'https://script.google.com/macros/s/AKfycbzYxUxH2qJ03H4t4j4cqSj2yK-PxQUcVsaUYGsdTt5R-Fp8S4MU45gG9G6MijVdkOqh/exec' 
-                    const form = document.forms['google-sheet'] 
-                    form.addEventListener('submit', e => { 
-                    e.preventDefault() 
-                    fetch(scriptURL, { method: 'POST', body: new FormData(form)}) 
-                    .then(response => {
-                        showAlert("Your message has been sent successfully", "success");
-                    }) 
-                    .catch(error => {
-                        showAlert('Error! ' + error.message, "error");
-                    });
-                });
+                    const form = document.forms['google-sheet'];
+                form.addEventListener('submit', submitForm);
 
                 function showAlert(message, type) {
                     const alertBox = document.createElement('div');
                     alertBox.className = `alert ${type}`;
                     alertBox.innerText = message;
+                    alertBox.style.position = 'fixed';
+                    alertBox.style.top = '50%';
+                    alertBox.style.left = '50%';
+                    alertBox.style.transform = 'translate(-50%, -50%)';
+                    alertBox.style.padding = '20px';
+                    alertBox.style.backgroundColor = '#ffc592';
+                    alertBox.style.color = '#17232d';
+                    alertBox.style.border = '1px solid rgba(255, 255, 255, 0.18)';
+                    alertBox.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.1)';
+                    alertBox.style.backdropFilter = 'blur(10px)';
+                    alertBox.style.borderRadius = '10px';
+                    alertBox.style.zIndex = '1000';
+                    alertBox.style.textAlign = 'center';
                     document.body.appendChild(alertBox);
                     setTimeout(() => {
                         alertBox.remove();
-                    }, 3000);
+                    }, 2000);
                 }
-                </script>
 
-                <script>
-                    document.getElementById('addNoteBtn2').addEventListener('click', function() {
-                        document.getElementById('popupForm').style.display = 'flex';
-                    });
+                document.getElementById('addNoteBtn2').addEventListener('click', function() {
+                    document.getElementById('popupForm').style.display = 'flex';
+                });
 
-                    function closeForm() {
-                        document.getElementById('popupForm').style.display = 'none';
-                    }
+                function closeForm() {
+                    document.getElementById('popupForm').style.display = 'none';
+                }
 
-                    function submitForm(event) {
-                        event.preventDefault();
-                        const name = document.getElementById('name').value;
-                        const message = document.getElementById('message').value;
-                        if (name && message) {
-                            showAlert("Your message has been sent successfully", "success");
-                            closeForm();
-                            document.getElementById('confirmationText').innerText = "Your message has been sent successfully!";
-                        } else {
-                            showAlert('Please fill out all fields.', "error");
+                async function submitForm(event) {
+                    event.preventDefault();
+                    const name = document.getElementById('name').value;
+                    const message = document.getElementById('message').value;
+                    if (name && message) {
+                        showAlert("Your message has been sent successfully", "success");
+                        closeForm();
+                        try {
+                            const response = await fetch(scriptURL, { method: 'POST', body: new FormData(form) });
+                            if (response.ok) {
+                                const confirmationText = document.getElementById('confirmationText');
+                                confirmationText.innerText = "Your message has been sent successfully!";
+                                confirmationText.style.display = 'block';
+                                setTimeout(() => {
+                                    confirmationText.style.display = 'none';
+                                }, 3000);
+                            } else {
+                                throw new Error('Network response was not ok.');
+                            }
+                        } catch (error) {
+                            showAlert('Error sending message. Please try again.', "error");
                         }
+                    } else {
+                        showAlert('Please fill out all fields.', "error");
                     }
+                }
 
-                    document.querySelector('.popup-form form').addEventListener('submit', submitForm);
+                document.querySelector('.popup-form form').addEventListener('submit', submitForm);
                 </script>
-                <div id="confirmationText" style="color: rgb(255, 255, 255); text-align: center; margin-top: 10px;"></div>
+                <div id="confirmationText" class="popup-box"></div>
 
                 
 
