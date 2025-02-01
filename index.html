@@ -311,6 +311,7 @@
                         if (name && message) {
                             showAlert("Your message has been sent successfully", "success");
                             closeForm();
+                            document.getElementById('confirmationText').innerText = "Your message has been sent successfully!";
                         } else {
                             showAlert('Please fill out all fields.', "error");
                         }
@@ -318,6 +319,7 @@
 
                     document.querySelector('.popup-form form').addEventListener('submit', submitForm);
                 </script>
+                <div id="confirmationText" style="color: rgb(255, 255, 255); text-align: center; margin-top: 10px;"></div>
 
                 
 
