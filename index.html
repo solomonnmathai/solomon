@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>wedding</title>
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
@@ -271,31 +271,52 @@
                 </div>
 
                 <script> 
-                    const scriptURL = 'https://script.google.com/macros/s/AKfycbwTpXTMf_B9z__29pNRKg4Ih7zG1GpXHPKq38wC0wcsD4VuQaCpUcVAHzkRXXoLN6zpow/exec' 
+                    const scriptURL = 'https://script.google.com/macros/s/AKfycbzYxUxH2qJ03H4t4j4cqSj2yK-PxQUcVsaUYGsdTt5R-Fp8S4MU45gG9G6MijVdkOqh/exec' 
                     const form = document.forms['google-sheet'] 
                     form.addEventListener('submit', e => { 
                     e.preventDefault() 
                     fetch(scriptURL, { method: 'POST', body: new FormData(form)}) 
-                    .then(response => alert("your message have been sent successfully")) 
-                    .catch(error => console.error('Error!', error.message)) 
+                    .then(response => {
+                        showAlert("Your message has been sent successfully", "success");
                     }) 
+                    .catch(error => {
+                        showAlert('Error! ' + error.message, "error");
+                    });
+                });
+
+                function showAlert(message, type) {
+                    const alertBox = document.createElement('div');
+                    alertBox.className = `alert ${type}`;
+                    alertBox.innerText = message;
+                    document.body.appendChild(alertBox);
+                    setTimeout(() => {
+                        alertBox.remove();
+                    }, 3000);
+                }
                 </script>
 
                 <script>
-                     document.getElementById('addNoteBtn2').addEventListener('click', function() {
-                     document.getElementById('popupForm').style.display = 'flex';});
+                    document.getElementById('addNoteBtn2').addEventListener('click', function() {
+                        document.getElementById('popupForm').style.display = 'flex';
+                    });
 
                     function closeForm() {
-                    document.getElementById('popupForm').style.display = 'none';}
+                        document.getElementById('popupForm').style.display = 'none';
+                    }
 
-                    function submitForm() {
-                    const name = document.getElementById('name').value;
-                    const message = document.getElementById('message').value;
-                    if (name && message) {
-                    alert(`Name: ${name}\nMessage: ${message}`);
-                    closeForm();} else {
-                    alert('Please fill out all fields.');}}
-   
+                    function submitForm(event) {
+                        event.preventDefault();
+                        const name = document.getElementById('name').value;
+                        const message = document.getElementById('message').value;
+                        if (name && message) {
+                            showAlert("Your message has been sent successfully", "success");
+                            closeForm();
+                        } else {
+                            showAlert('Please fill out all fields.', "error");
+                        }
+                    }
+
+                    document.querySelector('.popup-form form').addEventListener('submit', submitForm);
                 </script>
 
                 
